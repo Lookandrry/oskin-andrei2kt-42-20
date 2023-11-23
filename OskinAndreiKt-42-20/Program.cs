@@ -3,6 +3,7 @@ using NLog.Web;
 using NLog;
 using OskinAndreiKt_42_20.Database;
 using OskinAndreiKt_42_20.ServiceExtensions;
+using OskinAndreiKt_42_20.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 var logger = LogManager.Setup().LoadConfigurationFromAppSettings().GetCurrentClassLogger();
@@ -31,6 +32,7 @@ try
         app.UseSwaggerUI();
     }
 
+    app.UseMiddleware<ExceptionHandlerMiddleware>();
     app.UseAuthorization();
     app.MapControllers();
     app.Run();
@@ -43,3 +45,4 @@ finally
 {
     LogManager.Shutdown();
 }
+
