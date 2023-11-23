@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\OskinAndreiKt-42-20.props" />
+</Project>

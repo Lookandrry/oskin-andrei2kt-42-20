@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\OskinAndreiKt-42-20.props" />
+</Project>
