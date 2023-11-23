@@ -1,4 +1,5 @@
-﻿namespace OskinAndreiKt_42_20.Filters
+﻿
+namespace OskinAndreiKt_42_20.Filters
 {
     public class PrepodDegreeFilter
     {
