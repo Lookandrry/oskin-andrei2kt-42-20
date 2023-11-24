@@ -22,15 +22,16 @@ namespace OskinAndreiKt_42_20.Controllers
             _degreesService = degreeService;
             _context = context;
         }
-
-        [HttpPost(Name = "GetPrepodsByDegree")]
+        
+        [HttpPost]
+        [Route ("GetPrepodsByDegree")]
         public async Task<IActionResult> GetPrepodsByDegreeAsync(PrepodDegreeFilter filter, CancellationToken cancellationToken = default)
         {
             var degrees = await _degreesService.GetPrepodsByDegreeAsync(filter, cancellationToken);
 
             return Ok(degrees);
         }
-
+        
         [HttpPost("AddDegree", Name = "AddDegree")]
         public IActionResult CreateDegree([FromBody] Degree degree)
         {

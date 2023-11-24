@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Text.Json.Serialization;
+using System.Text.RegularExpressions;
 
 namespace OskinAndreiKt_42_20.Models
 {
@@ -16,7 +17,9 @@ namespace OskinAndreiKt_42_20.Models
         }
         public int KafedraId { get; set; }
         public int DegreeId { get; set; }
+        [JsonIgnore]
         public Kafedra? Kafedra { get; set; }
+        [JsonIgnore]
         public Degree? Degree { get; set; }
     }
 }

@@ -3,6 +3,8 @@ using OskinAndreiKt_42_20.Database;
 using OskinAndreiKt_42_20.Models;
 using OskinAndreiKt_42_20.Interfaces;
 using OskinAndreiKt_42_20.Filters;
+using Microsoft.EntityFrameworkCore;
+using NuGet.DependencyResolver;
 
 namespace OskinAndreiKt_42_20.Controllers
 {   [ApiController]
@@ -41,26 +43,31 @@ public class PrepodController : Controller
         return Ok(prepod);
     }
 
-    [HttpPut("EditPrepod")]
-    public IActionResult UpdatePrepod(string firstname, [FromBody] Prepod updatedPrepod)
+    [HttpPut("{id}")]
+    public async Task<IActionResult> UpdateTeacher(int id, Prepod prepod)
     {
-        var existingPrepod = _context.Prepod.FirstOrDefault(g => g.FirstName == firstname);
-
-        if (existingPrepod == null)
+        if (id != prepod.PrepodId)
         {
-            return NotFound();
+            return BadRequest();
         }
 
-        existingPrepod.FirstName = updatedPrepod.FirstName;
-        existingPrepod.LastName = updatedPrepod.LastName;
-        existingPrepod.MiddleName = updatedPrepod.MiddleName;
-        existingPrepod.KafedraId = updatedPrepod.KafedraId;
-        existingPrepod.DegreeId = updatedPrepod.DegreeId;
-        _context.SaveChanges();
+        try
+        {
 
-        return Ok();
+            _context.Entry(prepod).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+
+            return Ok("vse ok");
+        }
+        catch (DbUpdateConcurrencyException)
+        {
+            return BadRequest();
+        }
+
     }
-    //добавление для кафедры
+
+    
+  /*  //добавление для кафедры
     [HttpPost("AddKafedra", Name = "AddKafedra")]
     public IActionResult CreateKafedra([FromBody] OskinAndreiKt_42_20.Models.Kafedra kafedra)
     {
@@ -72,8 +79,8 @@ public class PrepodController : Controller
         _context.Kafedra.Add(kafedra);
         _context.SaveChanges();
         return Ok(kafedra);
-    }
-
+    }*/
+        /*
     [HttpPut("EditKafedra")]
     public IActionResult UpdateKafedra(string kafedraname, [FromBody] Kafedra updatedKafedra)
     {
@@ -88,9 +95,9 @@ public class PrepodController : Controller
         _context.SaveChanges();
 
         return Ok();
-    }
+    }*/
     //удаление для кафедры
-    [HttpDelete("DeleteKafedra")]
+   /* [HttpDelete("DeleteKafedra")]
     public IActionResult DeleteKafedra(string kafedraName, OskinAndreiKt_42_20.Models.Kafedra updatedKafedra)
     {
         var existingKafedra = _context.Kafedra.FirstOrDefault(g => g.KafedraName == kafedraName);
@@ -103,6 +110,24 @@ public class PrepodController : Controller
         _context.SaveChanges();
 
         return Ok();
+    }*/
+
+
+        // DELETE:
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeletePrepod(int id)
+        {
+
+            var prepod = await _context.Prepod.FindAsync(id);
+
+            if (prepod == null)
+            {
+                return NotFound();
+            }
+            _context.Prepod.Remove(prepod);
+            _context.SaveChanges();
+
+            return Ok("removal was successful");
+        }
     }
-}
 }
