@@ -89,7 +89,7 @@ namespace OskinAndreiKt_42_20.Tests
                 },
                 new Prepod
                 {
-                    FirstName = "mem1",
+                    FirstName = "mem",
                     LastName = "mem1",
                     MiddleName = "mem1",
                     Telephone = "99991",
@@ -104,11 +104,12 @@ namespace OskinAndreiKt_42_20.Tests
             // Act
             var filter = new PrepodDegreeFilter
             {
-                Name_degree = "кандидат наук"
+                DegreeId = 1,
+                FirstName = "mem"
             };
             var prepodsResult = await degreeService.GetPrepodsByDegreeAsync(filter, CancellationToken.None);
 
-            Assert.Equal(1, prepodsResult.Length);
+            Assert.Equal(2, prepodsResult.Length);
         }
     }
 }

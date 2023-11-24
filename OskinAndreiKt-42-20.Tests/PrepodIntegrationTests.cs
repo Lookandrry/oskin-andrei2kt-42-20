@@ -13,12 +13,12 @@ namespace OskinAndreiKt_42_20.Tests
 {
     public class PrepodIntegrationTests
     {
-        public readonly DbContextOptions<PrepodDbContext> _dbContextOptions;
+        public readonly DbContextOptions<PrepodDbContext> _dbContextOptions2;
 
         public PrepodIntegrationTests()
         {
-            _dbContextOptions = new DbContextOptionsBuilder<PrepodDbContext>()
-            .UseInMemoryDatabase(databaseName: "prepod_db")
+            _dbContextOptions2 = new DbContextOptionsBuilder<PrepodDbContext>()
+            .UseInMemoryDatabase(databaseName: "prepod_db2")
             .Options;
         }
 
@@ -26,7 +26,7 @@ namespace OskinAndreiKt_42_20.Tests
         public async Task GetPrepodsByKafedraAsync_KT4220_OneObjects()
         {
             // Arrange
-            var ctx = new PrepodDbContext(_dbContextOptions);
+            var ctx = new PrepodDbContext(_dbContextOptions2);
             var prepodService = new PrepodService(ctx);
             var kafedra = new List<Kafedra>
             {

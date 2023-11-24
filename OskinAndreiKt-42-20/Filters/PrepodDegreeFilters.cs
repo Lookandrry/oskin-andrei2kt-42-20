@@ -3,7 +3,8 @@ namespace OskinAndreiKt_42_20.Filters
 {
     public class PrepodDegreeFilter
     {
-        public string? Name_degree { get; set; }
+        public int? DegreeId { get; set; }
+        public string? FirstName { get; set; }
     }
 
 }

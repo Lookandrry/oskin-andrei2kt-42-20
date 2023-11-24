@@ -11,7 +11,7 @@ using OskinAndreiKt_42_20.Database;
 namespace OskinAndreiKt_42_20.Migrations
 {
     [DbContext(typeof(PrepodDbContext))]
-    [Migration("20231123230140_mig1")]
+    [Migration("20231124162143_mig1")]
     partial class mig1
     {
         /// <inheritdoc />

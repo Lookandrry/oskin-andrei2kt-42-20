@@ -20,7 +20,7 @@ namespace OskinAndreiKt_42_20.Interfaces
         }
         public Task<Prepod[]> GetPrepodsByDegreeAsync(PrepodDegreeFilter filter, CancellationToken cancellationToken = default)
         {
-            var degrees = _dbContext.Set<Prepod>().Where(w => w.Degree.Name_degree == filter.Name_degree).ToArrayAsync(cancellationToken);
+            var degrees = _dbContext.Set<Prepod>().Where(w => w.Degree.DegreeId == filter.DegreeId).ToArrayAsync(cancellationToken);
 
             return degrees;
         }
